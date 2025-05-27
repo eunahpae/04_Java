@@ -2,51 +2,59 @@ package com.ohgiraffers.section03.copy;
 
 public class Application2 {
 
-    public static void main(String[] args) {
+  public static void main(String[] args) {
 
-        /* comment. 얕은 복사를 활용하여 매개변수와 리턴값으로 활용할 수 있다. */
-        /* 얕은 복사의 활용
-        *  주로 메소드 호출 시 인자로 사용하는 경우와
-        *  리턴값으로 동일한 배열을 리턴해주고 싶은 경우 사용한다.
-        * */
+    /* comment. 얕은 복사를 활용하여 매개변수와 리턴값으로 활용할 수 있다. */
 
-        String[] names = {"홍길동", "유관순", "이순신"};
+    /* 얕은 복사의 활용
+     * - 메소드 호출 시 배열을 인자로 전달할 때 사용
+     * - 동일한 배열을 반환(return)하고자 할 때 사용
+     * → 모두 배열의 주소값(참조값)을 전달하므로 메모리를 절약할 수 있고, 원본 배열의 변경도 가능하다.
+     */
 
-        System.out.println("names의 hashcode : " + names.hashCode());
+    // 이름 목록을 저장한 배열 생성
+    String[] names = {"홍길동", "유관순", "이순신"};
 
-        /* 1. 인자와 매개변수로 활용 */
-        /* 다른 메소드에서 동일한 배열을 사용하고 싶을 경우 얕은 복사를 이용한다. */
-        print(names);
+    // 현재 배열의 주소값(hashcode) 출력
+    System.out.println("names의 hashcode : " + names.hashCode());
 
-        /* 2. 리턴값으로 활용 */
-        String[] animals = getAnimals();
+    /* 1. 배열을 메서드 인자로 전달 (얕은 복사) */
+    /* - 메서드 내부에서 동일한 배열 객체를 사용하고 싶은 경우 얕은 복사를 이용한다. */
+    print(names);
 
-        System.out.println("리턴 받은 animals hashcode : " + animals.hashCode());
+    /* 2. 메서드에서 동일한 배열을 리턴받기 (얕은 복사) */
+    /* - 메서드 내부에서 생성한 배열의 주소값을 리턴받아 외부에서도 동일 배열 사용 가능 */
+    String[] animals = getAnimals();
 
-        print(animals);
+    System.out.println("리턴 받은 animals hashcode : " + animals.hashCode());
 
+    print(animals);
+  }
+
+  // 전달받은 배열의 내용을 출력하는 메서드
+  public static void print(String[] sarr) {
+
+    // 전달받은 배열의 주소값 출력
+    System.out.println("sarr의 hashcode : " + sarr.hashCode());
+
+    // 배열 요소 출력
+    System.out.print("배열 요소 출력 : ");
+    for (int i = 0; i < sarr.length; i++) {
+      System.out.print(sarr[i] + " ");
     }
+    System.out.println();  // 줄바꿈
+  }
 
-    public static void print(String[] sarr) {
+  // 문자열 배열을 생성하여 리턴하는 메서드
+  public static String[] getAnimals() {
 
-        // 전달받은 배열의 hashcode
-        System.out.println("sarr의 hashcode : " + sarr.hashCode());
+    // 동물 이름이 담긴 배열 생성
+    String[] animals = new String[]{"낙타", "호랑이", "나무늘보"};
 
-        // 전달받은 배열의 값
-        for(int i = 0; i < sarr.length; i++) {
-            System.out.print(sarr[i] + " ");
-        }
+    // 생성된 배열의 주소값 출력
+    System.out.println("새로 만든 animals의 hashcode : " + animals.hashCode());
 
-        System.out.println();
-    }
-
-    public static String[] getAnimals() {
-
-        String[] animals = new String[] {"낙타", "호랑이", "나무늘보"};
-
-        // 얕은 복사 확인을 위한 hashcode 출력
-        System.out.println("새로 만든 animals의 hashcode : " + animals.hashCode());
-
-        return animals;
-    }
+    // 배열 주소값(참조값) 리턴 (얕은 복사)
+    return animals;
+  }
 }
