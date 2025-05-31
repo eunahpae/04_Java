@@ -12,7 +12,7 @@ public class ParameterTest {
         System.out.println("매개변수로 전달받은 값 : " + iarr);
 
         System.out.print("배열의 값 출력 : ");
-        for(int i = 0; i < iarr.length; i++) {
+        for (int i = 0; i < iarr.length; i++) {
             System.out.print(iarr[i] + " ");
         }
         System.out.println();
@@ -20,7 +20,7 @@ public class ParameterTest {
         iarr[0] = 99;
 
         System.out.print("변경 후 배열의 값 출력 : ");
-        for(int i = 0; i < iarr.length; i++) {
+        for (int i = 0; i < iarr.length; i++) {
             System.out.print(iarr[i] + " ");
         }
         System.out.println();
@@ -42,12 +42,12 @@ public class ParameterTest {
         rectAngle.calcRound();
     }
 
-    public void testVariableLengthArrayParameter(String name, String...hobby) {
+    public void testVariableLengthArrayParameter(String name, String... hobby) {
 
         System.out.println("이름 : " + name);
         System.out.println("취미의 갯수 : " + hobby.length);
         System.out.print("취미 : ");
-        for(int i = 0; i < hobby.length; i++) {
+        for (int i = 0; i < hobby.length; i++) {
             System.out.print(hobby[i] + " ");
         }
         System.out.println();

@@ -7,7 +7,8 @@ public class UserDTO {
     private String name;
     private java.util.Date enrollDate;
 
-    public UserDTO() {}
+    public UserDTO() {
+    }
 
     public UserDTO(String id, String pwd, String name, java.util.Date enrollDate) {
         this.id = id;
@@ -50,7 +51,8 @@ public class UserDTO {
 
     // 모든 필드의 값을 하나의 문자열로 반환하는 메소드로 필드값 확인용으로 많이 사용한다.
     public String getInformation() {
-        return "UserDTO [id=" + this.id + ", pwd=" + this.pwd + ", name=" + this.name + ", enrollDate=" + this.enrollDate + "]";
+        return "UserDTO [id=" + this.id + ", pwd=" + this.pwd + ", name=" + this.name
+            + ", enrollDate=" + this.enrollDate + "]";
     }
 
 }

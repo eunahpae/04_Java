@@ -6,49 +6,53 @@ public class Application {
 
         /* comment. static 키워드에 대해 이해할 수 있다. */
 
-        /* static
-        * : 정적 메모리 영역에 프로그램이 start 될 때 할당을 하는 키워드이다.
-        *   인스턴스를 생성하지 않고도 사용할 클래스의 멤버(필드, 메소드)에 지정할 수 있다.
-        *   여러 인스턴스가 공유해서 사용할 목적의 공간이다.
-        *   하지만 static 키워드의 남발은 유지보수와 추적이 힘든 코드를 작성하는 피해야할 방식이다.
-        *   명확한 목적이 존재하지 않는 이상 static 키워드 사용은 자제하자.
-        *   의도적으로 static 키워드를 사용하는 대표적인 예는 singleton 객체를 생성할 때 이다.
-        * */
+        /* static 키워드란?
+         * - 프로그램 시작 시 메소드 영역(static 영역)에 로딩되는 키워드로,
+         *   인스턴스를 생성하지 않고도 접근 가능한 필드나 메소드에 붙인다.
+         * - 객체가 여러 개 생성되더라도 static 멤버는 클래스당 하나만 존재하며,
+         *   모든 인스턴스가 공유한다.
+         * - 대표적인 사용 예: 상수, 공용 메소드(유틸 클래스), 싱글톤 패턴 등.
+         * - 단, 남용하면 코드의 의도를 파악하기 어렵고 테스트나 유지보수에 어려움을 줄 수 있으므로
+         *   명확한 목적이 있을 때만 사용해야 한다.
+         */
 
         /* 1. static 키워드를 필드에서 사용 */
         StaticFieldTest sft1 = new StaticFieldTest();
 
-        System.out.println(sft1.getNonStaticCount());
-        System.out.println(sft1.getStaticCount());
+        System.out.println(sft1.getNonStaticCount());     // 인스턴스 변수 값 출력 (각 인스턴스마다 별도 관리됨)
+        System.out.println(sft1.getStaticCount());        // static 변수 값 출력 (모든 인스턴스가 공유)
 
-        sft1.increaseNonStaticCount();
-        sft1.increaseStaticCount();
+        sft1.increaseNonStaticCount();                    // 인스턴스 변수 값 1 증가
+        sft1.increaseStaticCount();                       // static 변수 값 1 증가
 
-        System.out.println(sft1.getNonStaticCount());
-        System.out.println(sft1.getStaticCount());
+        System.out.println(sft1.getNonStaticCount());     // 1 출력
+        System.out.println(sft1.getStaticCount());        // 1 출력
 
-        StaticFieldTest sft2 = new StaticFieldTest();
+        StaticFieldTest sft2 = new StaticFieldTest();     // 두 번째 인스턴스 생성
 
-        System.out.println(sft2.getNonStaticCount());
-        System.out.println(sft2.getStaticCount());  // 값 유지
+        System.out.println(sft2.getNonStaticCount());     // 0 출력 (새 인스턴스의 초기값)
+        System.out.println(sft2.getStaticCount());        // 1 출력 (static은 공유됨)
 
-        /* 인스턴스 변수의 경우에는 sft1, sft2 두 개의 인스턴스가 서로 값을 공유하지 못하고
-        * 인스턴스를 생성할때마다 0으로 초기화 되었다.
-        * 하지만 static 필드의 경우에는 클래스변수 자체가 프로그램을 종료할 때 까지 유지되고
-        * 있기 때문에 값을 유지하고 있다.
-        * 따라서 여러 개의 인스턴스가 같은 공간을 공유할 목적으로 필드에 static 키워드를 사용한다.
-        * */
+        /* 인스턴스 변수(non-static)는 객체마다 별도로 존재하므로 sft2는 초기값 0을 가진다.
+         * static 변수는 클래스 로딩 시 생성되고 모든 인스턴스에서 공유되므로
+         * 이전 인스턴스(sft1)에서 증가한 값이 그대로 유지된다.
+         */
 
         /* 2. static 메소드 확인 */
-        /* 2-1. non-static 메소드 호출 */
+
+        /* 2-1. non-static 메소드 호출
+         * - 반드시 객체를 생성한 후 인스턴스를 통해 호출해야 한다.
+         */
         StaticMethodTest smt = new StaticMethodTest();
-        smt.nonStaticMethod();
+        smt.nonStaticMethod();      // 일반 인스턴스 메소드 호출
 
-        /* static method는 정적 영역에 두고 인스턴스를 생성하지 않고 호출할 목적으로
-        * 만들기 때문에 static 메소드를 호출하는 방식으로 호출해야 한다. */
-        smt.staticMethod(); // 권장하지 않음
+        /* static 메소드는 클래스가 로딩될 때 함께 로딩되므로,
+         * 인스턴스 생성 없이도 호출할 수 있다.
+         * 인스턴스를 통해 호출하는 것도 가능하나, 클래스명을 통해 호출하는 것이 일반적이고 권장된다.
+         */
+        smt.staticMethod();                  // 가능하지만 권장되지 않음 (인스턴스를 통한 호출)
 
-        /* 2-2. static 메소드 호출 */
-        StaticMethodTest.staticMethod();    // 권장함
+        /* 2-2. Static 메소드 호출 */
+        StaticMethodTest.staticMethod();     // 권장되는 방식 (클래스명을 통한 호출)
     }
 }
